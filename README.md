@@ -1,36 +1,161 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## 🚦 Getting Started
 
-## Getting Started
+### Prerequisites
 
-First, run the development server:
+- Node.js 18+ installed
+- MySQL database running
+- npm or yarn package manager
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone <your-repo-url>
+   cd tasks-manager
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables**
+
+   Create a `.env` file in the root directory:
+
+   ```env
+   # Database
+   DATABASE_URL="mysql://username:password@localhost:3306/tasks_manager"
+   ```
+
+4. **Set up the database**
+
+   ```bash
+   # Generate Prisma client
+   npx prisma generate
+
+   # Run database migrations
+   npx prisma db push
+
+   # (Optional) Open Prisma Studio to view your database
+   npx prisma studio
+   ```
+
+5. **Start the development server**
+
+   ```bash
+   npm run dev
+   ```
+
+6. **Open your browser**
+
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+## 📖 Usage
+
+### Creating Tasks
+
+1. Fill in the task title (required)
+2. Add an optional description
+3. Click "Add Task" to create
+
+### Managing Tasks
+
+- **Mark as Complete**: Click the checkbox next to any task
+- **Mark as Incomplete**: Click the checkbox on completed tasks
+- **Delete Task**: Click the "Delete" button (red)
+
+### Task Organization
+
+- **Pending Tasks**: Shows all incomplete tasks
+- **Completed Tasks**: Shows all finished tasks with strikethrough styling
+
+## 🗄️ Database Schema
+
+```prisma
+model Task {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  completed   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🔧 Available Scripts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Development
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run start        # Start production server
+npm run lint         # Run ESLint
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Database
+npx prisma studio    # Open database GUI
+npx prisma generate  # Generate Prisma client
+npx prisma db push   # Push schema changes
+npx prisma migrate   # Create and run migrations
+```
 
-## Learn More
+## 🎨 Styling
 
-To learn more about Next.js, take a look at the following resources:
+The application uses Tailwind CSS with custom component classes:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `.task-card` - Task container styling
+- `.task-completed` - Completed task styling
+- `.btn-primary` - Primary button styling
+- `.btn-secondary` - Secondary button styling
+- `.btn-danger` - Delete button styling
+- `.input-field` - Form input styling
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🔒 Type Safety
 
-## Deploy on Vercel
+This application is fully type-safe:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Frontend to Backend**: tRPC ensures type safety across API calls
+- **Database**: Prisma provides type-safe database operations
+- **Components**: TypeScript interfaces for all props and state
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🚀 Deployment
+
+### Vercel (Recommended)
+
+1. Push your code to GitHub
+2. Connect your repository to Vercel
+3. Add your `DATABASE_URL` environment variable
+4. Deploy!
+
+### Other Platforms
+
+1. Build the application: `npm run build`
+2. Set up your MySQL database
+3. Configure environment variables
+4. Run migrations: `npx prisma db push`
+5. Start the server: `npm start`
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Commit your changes: `git commit -m 'Add amazing feature'`
+4. Push to the branch: `git push origin feature/amazing-feature`
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- [Next.js](https://nextjs.org/) - The React Framework
+- [tRPC](https://trpc.io/) - End-to-end typesafe APIs
+- [Prisma](https://prisma.io/) - Next-generation ORM
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+
+---
+
+**Built with ❤️ using modern web technologies**
